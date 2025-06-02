@@ -32,4 +32,5 @@ public class Block {
 
     @Column(name = "type",nullable = false)
     private BlockType type;
+
 }

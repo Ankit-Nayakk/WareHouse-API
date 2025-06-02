@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping("/register")
     public ResponseEntity<ResponseStructure<UserResponse>> addUser(@RequestBody UserRegistrationRequest urr){
        UserResponse ur = userService.addUser(urr);
        ResponseStructure<UserResponse> responseStructure = new ResponseStructure(HttpStatus.CREATED.value(),"User Successfully Added Into the Database",ur);
@@ -29,9 +29,9 @@ public class UserController {
 
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
     }
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<ResponseStructure<UserResponse>> findUserById(@PathVariable String userId){
-        UserResponse userResponse = userService.findUserById(userId);
+    @GetMapping("/users")
+    public ResponseEntity<ResponseStructure<UserResponse>> findUserById(){
+        UserResponse userResponse = userService.findUserById();
         ResponseStructure<UserResponse> responseStructure = new ResponseStructure<>(HttpStatus.CREATED.value(), "User Find By Respected Id",userResponse);
         return new ResponseEntity<ResponseStructure<UserResponse>>(responseStructure,HttpStatus.CREATED);
     }

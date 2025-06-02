@@ -10,7 +10,7 @@ public interface UserService {
 
     UserResponse updateUser(UserRequest request, String userId);
 
-    UserResponse findUserById(String userId);
+    UserResponse findUserById();
 
     UserResponse deleteUserById(String userId);
 }

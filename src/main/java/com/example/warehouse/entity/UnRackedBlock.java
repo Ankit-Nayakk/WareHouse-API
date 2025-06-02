@@ -3,6 +3,6 @@ package com.example.warehouse.entity;
 import jakarta.persistence.Entity;
 
 @Entity
-public class UnRecked extends Block{
+public class UnRackedBlock extends Block{
 
 }
