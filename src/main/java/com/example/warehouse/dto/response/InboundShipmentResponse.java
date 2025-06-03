@@ -1,19 +1,16 @@
 package com.example.warehouse.dto.response;
 
+import com.example.warehouse.entity.Product;
 import com.example.warehouse.enums.ShipmentStatus;
+
+import java.time.Instant;
 
 public record InboundShipmentResponse(
         String shipmentId,
-        String title,
-        double weight,
-        double length,
-        double height,
-        double width,
-        int quantity,
-        double price,
-        String materialType,
-        String careInstruction,
+        ProductResponse productResponse,
         String sellerId,
-        ShipmentStatus shipmentStatus
+        long createdAt,
+        ShipmentStatus status,
+        int quantity
 ) {
 }

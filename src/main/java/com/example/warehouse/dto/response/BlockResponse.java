@@ -6,7 +6,7 @@ public record BlockResponse(
     String blockId,
     double height,
     double length,
-    double breath,
+    double width,
     BlockType type
 ) {
 }

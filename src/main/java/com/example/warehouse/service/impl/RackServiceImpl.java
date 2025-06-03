@@ -27,10 +27,11 @@ public class RackServiceImpl implements RackService {
 
     @Override
     public RackResponse createRack(RackRequest request, String blockId) {
-        Block block = blockRepository.findById(blockId).orElseThrow(() -> new BlockNotFoundByIdException("Block Not Found!!!"));
+        Block block = blockRepository.findById(blockId)
+                .orElseThrow(() -> new BlockNotFoundByIdException("Block Not Found!!!"));
 
+        Rack rack = rackMapper.toEntity(request, new Rack());
         if (block instanceof RackedBlock rackedBlock) {
-            Rack rack = rackMapper.toEntity(request, new Rack());
             rack.setRackedBlock(rackedBlock);
             blockRepository.save(block);
             rackRepository.save(rack);

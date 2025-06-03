@@ -5,7 +5,7 @@ import com.example.warehouse.enums.BlockType;
 public record BlockRequest(
         double height,
         double length,
-        double breath,
+        double width,
         BlockType type
 ) {
 }

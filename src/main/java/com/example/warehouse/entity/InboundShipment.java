@@ -5,12 +5,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "inbound_shipment")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class InboundShipment {
@@ -20,35 +23,11 @@ public class InboundShipment {
     @Column(name = "shipment_id", nullable = false, updatable = false)
     private String shipmentId;
 
-    @Column(name = "product_title", nullable = false)
-    private String productTitle;
+    @Column(name = "seller_id", nullable = false)
+    private String sellerId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
-    @Column(name = "product_price", nullable = false)
-    private double productPrice;
-
-    @Column(name = "product_weight", nullable = false)
-    private double productWeight;
-
-    @Column(name = "product_length", nullable = false)
-    private double productLength;
-
-    @Column(name = "product_width", nullable = false)
-    private double productWidth;
-
-    @Column(name = "product_height", nullable = false)
-    private double productHeight;
-
-    @Column(name = "material_type", nullable = false)
-    private String materialType;
-
-    @Column(name = "care_instruction", nullable = false)
-    private String careInstrucution;
-
-    @Column(name = "seller_id", nullable = false)
-    private String sellerId;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false,updatable = false)
@@ -60,4 +39,9 @@ public class InboundShipment {
 
     @Column(name = "shipment_status", nullable = false)
     private ShipmentStatus shipmentStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
 }

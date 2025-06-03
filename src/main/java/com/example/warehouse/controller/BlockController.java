@@ -20,9 +20,9 @@ public class BlockController {
     private BlockService blockService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("blocks/{userId}")
-    public ResponseEntity<ResponseStructure<BlockResponse>> createBlock(@RequestBody BlockRequest request, @PathVariable String userId){
-       BlockResponse blockResponse = blockService.createBlock(request,userId);
+    @PostMapping("blocks/{roomId}")
+    public ResponseEntity<ResponseStructure<BlockResponse>> createBlock(@RequestBody BlockRequest request, @PathVariable String roomId){
+       BlockResponse blockResponse = blockService.createBlock(request,roomId);
        ResponseStructure<BlockResponse> responseStructure = new ResponseStructure<>(HttpStatus.CREATED.value(), "Block Created Successfully!",blockResponse);
        return new ResponseEntity<ResponseStructure<BlockResponse>>(responseStructure,HttpStatus.CREATED);
     }

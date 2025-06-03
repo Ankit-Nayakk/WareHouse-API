@@ -17,7 +17,7 @@ public class BlockMapper {
         }
         target.setHeight(source.height());
         target.setLength(source.length());
-        target.setBreath(source.breath());
+        target.setWidth(source.width());
         target.setType(source.type());
         return target;
     }
@@ -30,7 +30,7 @@ public class BlockMapper {
             block.getBlockId(),
             block.getHeight(),
             block.getLength(),
-            block.getBreath(),
+            block.getWidth(),
             block.getType()
         );
     }

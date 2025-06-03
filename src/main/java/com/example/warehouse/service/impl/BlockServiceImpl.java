@@ -30,8 +30,8 @@ public class BlockServiceImpl implements BlockService {
 
     @Transactional
     @Override
-    public BlockResponse createBlock(BlockRequest request, String userId) {
-        Room room = roomRepository.findById(userId).orElseThrow(() -> new RoomNotFoundByIdException("Room is Not Exist!!"));
+    public BlockResponse createBlock(BlockRequest request, String roomId) {
+        Room room = roomRepository.findById(roomId).orElseThrow(() -> new RoomNotFoundByIdException("Room is Not Exist!!"));
         Block block = switch (request.type()) {
             case RACKED -> blockMapper.toEntity(request, new RackedBlock());
             case UNRACKED -> blockMapper.toEntity(request, new UnRackedBlock());

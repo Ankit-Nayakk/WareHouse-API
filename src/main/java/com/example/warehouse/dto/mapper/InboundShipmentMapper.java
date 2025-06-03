@@ -1,53 +1,63 @@
 package com.example.warehouse.dto.mapper;
 
 import com.example.warehouse.dto.request.InboundShipmentRequest;
+import com.example.warehouse.dto.request.ProductRequest;
 import com.example.warehouse.dto.response.InboundShipmentResponse;
-import com.example.warehouse.dto.response.RackResponse;
+import com.example.warehouse.dto.response.ProductResponse;
 import com.example.warehouse.entity.InboundShipment;
-import com.example.warehouse.entity.Rack;
+import com.example.warehouse.entity.Product;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class InboundShipmentMapper {
     public InboundShipment toEntity(InboundShipmentRequest source, InboundShipment target){
-        if (source == null) {
-            return target;
-        }
-        if (target == null) {
-            target = new InboundShipment();
-        }
-
         target.setSellerId(source.sellerId());
-        target.setProductTitle(source.productDetails().title());
-        target.setProductWeight(source.productDetails().weight());
-        target.setProductLength(source.productDetails().length());
-        target.setProductHeight(source.productDetails().height());
-        target.setProductWidth(source.productDetails().width());
-        target.setMaterialType(source.productDetails().materialType());
-        target.setCareInstrucution(source.productDetails().careInstruction());
-        target.setQuantity(source.productDetails().quantity());
-        target.setProductPrice(source.productDetails().price());
-        target.setShipmentStatus(source.shipmentStatus());
+        target.setShipmentStatus(source.status());
+        target.setQuantity(source.quantity());
+        target.setProduct(productToEntity(source.productDetails()));
         return target;
     }
 
-    public InboundShipmentResponse toResponse(InboundShipment inboundShipment){
-        if (inboundShipment == null) {
-            return null;
-        }
+    public InboundShipmentResponse toResponse(InboundShipment inBoundShipment) {
+
         return new InboundShipmentResponse(
-                inboundShipment.getShipmentId(),
-                inboundShipment.getProductTitle(),
-                inboundShipment.getProductWeight(),
-                inboundShipment.getProductLength(),
-                inboundShipment.getProductHeight(),
-                inboundShipment.getProductWidth(),
-                inboundShipment.getQuantity(),
-                inboundShipment.getProductPrice(),
-                inboundShipment.getMaterialType(),
-                inboundShipment.getCareInstrucution(),
-                inboundShipment.getSellerId(),
-                inboundShipment.getShipmentStatus()
+                inBoundShipment.getShipmentId(),
+                productToResponse(inBoundShipment.getProduct()),
+                inBoundShipment.getSellerId(),
+                inBoundShipment.getCreatedAt().toEpochMilli(),
+                inBoundShipment.getShipmentStatus(),
+                inBoundShipment.getQuantity()
+        );
+    }
+
+    public Product productToEntity(ProductRequest productRequest) {
+
+        Product product = new Product();
+        product.setId(productRequest.id());
+        product.setTitle(productRequest.title());
+        product.setWeight(productRequest.weight());
+        product.setLength(productRequest.length());
+        product.setHeight(productRequest.height());
+        product.setWidth(productRequest.width());
+        product.setMaterialType(productRequest.materialType());
+        product.setCareInstruction(productRequest.careInstruction());
+        product.setPrice(productRequest.price());
+
+        return product;
+    }
+
+    private ProductResponse productToResponse(Product product) {
+
+        return new ProductResponse(
+                product.getId(),
+                product.getTitle(),
+                product.getWeight(),
+                product.getLength(),
+                product.getHeight(),
+                product.getWidth(),
+                product.getMaterialType(),
+                product.getCareInstruction(),
+                product.getPrice()
         );
     }
 

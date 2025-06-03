@@ -26,11 +26,9 @@ public class Rack {
     @Column(name = "width",nullable = false)
     private double width;
 
-    @ManyToOne
-    @JoinColumn(name = "block_id", nullable = false)
-    private List<Block> block;
 
     @ManyToOne
-    @JoinColumn(name = "racked_block_id", nullable = false)
+    @JoinColumn(name = "racked_block_id")
     private RackedBlock rackedBlock;
+
 }
