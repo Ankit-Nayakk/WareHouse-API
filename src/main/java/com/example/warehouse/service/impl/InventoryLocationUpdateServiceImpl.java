@@ -1,8 +1,6 @@
 package com.example.warehouse.service.impl;
 
 import com.example.warehouse.dto.request.InventoryLocationUpdateRequest;
-import com.example.warehouse.dto.response.InventoryLocationUpdateResponse;
-import com.example.warehouse.dto.wrapper.ResponseStructure;
 import com.example.warehouse.entity.Block;
 import com.example.warehouse.entity.ProductUnit;
 import com.example.warehouse.entity.Room;
@@ -12,7 +10,6 @@ import com.example.warehouse.repository.BlockRepository;
 import com.example.warehouse.repository.ProductUnitRepository;
 import com.example.warehouse.service.contract.InventoryLocationUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
