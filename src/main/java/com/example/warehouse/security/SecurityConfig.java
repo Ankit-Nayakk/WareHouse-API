@@ -26,6 +26,7 @@ public class SecurityConfig {
         //authorization of endpoints as public and private
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register").permitAll()
+                .requestMatchers("/client/register").permitAll()
                 .anyRequest().authenticated());
 
         //type of authentication to user [HttpBasic, FormLogin, AuthOLogin]
