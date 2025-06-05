@@ -24,7 +24,7 @@ public class ClientMapper {
         return target;
     }
 
-    public ClientResponse toResponse(Client client){
+    public ClientResponse toResponse(Client client, String rawSecretKey){
         if (client == null) {
             return null;
         }
@@ -33,7 +33,7 @@ public class ClientMapper {
                 client.getOrganizationName(),
                 client.getOrganizationEmail(),
                 client.getApiKey(),
-                client.getSecretKey(),
+                rawSecretKey,
                 client.getRegisteredAt()
         );
     }

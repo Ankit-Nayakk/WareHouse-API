@@ -9,5 +9,6 @@ public record ClientResponse(
         String apiKey,
         String secretKey,
         Instant registeredAt
+
 ) {
 }

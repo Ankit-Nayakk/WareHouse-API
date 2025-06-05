@@ -30,15 +30,15 @@ public class ClientServiceImpl implements ClientService {
     public ClientResponse registerClient(ClientRequest request) {
         String apiKey = UUID.randomUUID().toString();
         String secretKey = Base64.getEncoder().encodeToString(new SecureRandom().generateSeed(32));
-        secretKey = passwordEncoder.encode(secretKey);
+        String encodedSecretKey = passwordEncoder.encode(secretKey);
 
         Client client = new Client();
         client.setOrganizationName(request.organizationName());
         client.setOrganizationEmail(request.organizationEmail());
         client.setApiKey(apiKey);
-        client.setSecretKey(secretKey);
+        client.setSecretKey(encodedSecretKey);
 
         clientRepository.save(client);
-        return clientMapper.toResponse(client);
+        return clientMapper.toResponse(client, secretKey);
     }
 }

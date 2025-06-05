@@ -7,6 +7,7 @@ import com.example.warehouse.service.contract.InboundShipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ public class InboundShipmentController {
     @Autowired
     private InboundShipmentService inboundShipmentService;
 
+    @PreAuthorize("hasAuthority('CLIENT')")
     @PostMapping("/inboundShipments/{warehouseId}")
     public ResponseEntity<ResponseStructure<InboundShipmentResponse>> createInboundShipment(@RequestBody InboundShipmentRequest request,@PathVariable String warehouseId){
         InboundShipmentResponse inboundShipmentResponse = inboundShipmentService.createInboundShipment(request, warehouseId);
